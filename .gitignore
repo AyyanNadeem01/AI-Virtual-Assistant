@@ -1,0 +1,42 @@
+# ===== Node.js (Frontend + Backend) =====
+backend/node_modules/
+frontend/node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+backend/.env
+frontend/.env
+.env
+
+# ===== Build & Output =====
+backend/dist/
+frontend/dist/
+backend/build/
+frontend/build/
+
+# Cache
+.cache/
+.npm/
+.yarn-cache/
+.pnpm-store/
+
+# ===== Tests & Coverage =====
+coverage/
+*.lcov
+
+# ===== Temporary files =====
+.tmp/
+.temp/
+*.tmp
+*.swp
+
+# ===== OS / Editor files =====
+.DS_Store
+.vscode/
