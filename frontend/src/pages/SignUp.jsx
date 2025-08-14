@@ -7,23 +7,28 @@ import { UserDataContext } from '../context/userContext';
 import axios from "axios"
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const {serverUrl}=useContext(UserDataContext)
+  const {serverUrl, userData, setUserData}=useContext(UserDataContext)
   const navigate = useNavigate();
   const [name,setName]=useState("")
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
+  const [loading,setLoading]=useState(false)
   const [error,setError]=useState("")
   const handleSignUp=async(e)=>{
     e.preventDefault()
     setError("")
-    try{
+    try{setLoading(true)
         let result=await axios.post(`${serverUrl}/api/auth/signup`,{
             name,email,password
         },{withCredentials:true})
-        console.log(result.data)
+        setUserData(result.data)
+        setLoading(false)
+        navigate("/customize")
     }catch(error){
             console.log(error)
+            setUserData(null)
             setError(error.response.data.message)
+            setLoading(false)
     }
   }
   return (
@@ -101,13 +106,14 @@ const SignUp = () => {
             <p className='text-[17px] text-red-500'>*{error}</p>
         )}
         {/* SignUp Button */}
-        <button
+        <button disabled={loading}
           className="mt-[30px] text-black font-semibold text-[19px] min-w-[150px] h-[60px]  
           bg-white rounded-full transition-all duration-300 ease-in-out
           hover:bg-blue-400 hover:text-white hover:shadow-lg hover:shadow-blue-400/50
           active:scale-95"
         >
-          SignUp
+           {loading?"Loading":"SignUp"}
+        
         </button>
 
         {/* SignIn Link */}
