@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser"
 import cors from "cors"
 import userRouter from "./routes/user.routes.js"
 import { v2 as cloudinary } from 'cloudinary';
+import geminiResponse from "./gemini.js"
 
 dotenv.config()
 const app=express()
@@ -27,7 +28,14 @@ app.use(cors({
 app.use("/api/auth",authRouter)
 app.use("/api/user",userRouter)
 
-
+app.get("/", async (req, res) => {
+  let prompt = req.query.prompt;
+  if (!prompt) {
+    return res.status(400).json({ error: "Prompt is required" });
+  }
+  let data = await geminiResponse(prompt);
+  res.json(data);
+});
 app.listen(port,()=>{
     connectDb();
     console.log("Server is running at PORT:",port) 
