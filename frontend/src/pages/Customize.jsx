@@ -8,6 +8,7 @@ import image6 from "../assets/image6.jpeg"
 import image7 from "../assets/image7.jpeg"
 import authBg from "../assets/authBg.png"
 import { RiImageAddLine } from "react-icons/ri"
+import { IoArrowBack } from "react-icons/io5"
 import { UserDataContext } from '../context/userContext'
 import {useNavigate} from "react-router-dom"
 const Customize = () => {
@@ -27,6 +28,7 @@ const Customize = () => {
 
   return (
     <div className='flex flex-col justify-center items-center w-full min-h-screen bg-gradient-to-t from-[black] to-[#0404adf4] py-10'>
+      <IoArrowBack onClick={() => navigate(-1)} className='cursor-pointer absolute top-[30px] left-[30px] text-white w-[25px] h-[25px]'/>
       <h1 className='mb-[30px] gap-[20px] p-[20px] text-white text-[30px] text-center'>
         Select your <span className='text-blue-400'>Assistant Image</span>
       </h1>

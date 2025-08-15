@@ -1,8 +1,11 @@
 import React, { useContext, useState } from 'react'
 import { UserDataContext } from '../context/userContext'
+import { IoArrowBack } from "react-icons/io5"
+import { useNavigate } from "react-router-dom";
 import axios from "axios"
 const Customize2 = () => {
     // Inside customize2.jsx
+    const navigate=useNavigate()
 const {
   setUserData,
   userData,
@@ -15,11 +18,11 @@ const [loading, setLoading]=useState(false)
 const handleUpdateAssistant = async () => {
   try {setLoading(true)
     const formData = new FormData();
-    formData.append("AssistantName", assistantName);
+    formData.append("assistantName", assistantName);
 
     // Check if a file was uploaded
     if (backendImage) {
-      formData.append("AssistantImage", backendImage);
+      formData.append("assistantImage", backendImage);
     } else if (selectedImage) {
       // If a pre-selected image was chosen, send its URL.
       // The backend will need to handle this URL.
@@ -36,12 +39,14 @@ const handleUpdateAssistant = async () => {
     console.log(result.data);
     setUserData(result.data);
     setLoading(false)
+      navigate("/");
   } catch (error) {
     console.log(error);
   }
 };
     return (
-    <div className='flex flex-col justify-center items-center w-full min-h-screen bg-gradient-to-t from-[black] to-[#0404adf4] py-10'>
+    <div className='relative flex flex-col justify-center items-center w-full min-h-screen bg-gradient-to-t from-[black] to-[#0404adf4] py-10'>
+<IoArrowBack onClick={()=> navigate("/customize")} className='cursor-pointer absolute top-[30px] left-[30px] text-white w-[25px] h-[25px]'/>
       <h1
       className='mb-[30px] gap-[20px] p-[20px] text-white text-[30px] text-center'
       >Enter your <span
@@ -62,6 +67,7 @@ const handleUpdateAssistant = async () => {
         {assistantName && (   
             <button onClick={
                 handleUpdateAssistant
+                
             }
             type="submit" className="h-[50px] w-[300px] mt-[30px] text-black font-semibold text-[19px] min-w-[150px] h-[60px]  
           bg-white rounded-full transition-all duration-300 ease-in-out
