@@ -5,21 +5,30 @@ import authRouter from "./routes/auth.routes.js"
 import cookieParser from "cookie-parser"
 import cors from "cors"
 import userRouter from "./routes/user.routes.js"
+import { v2 as cloudinary } from 'cloudinary';
+
 dotenv.config()
 const app=express()
 
+// Add the Cloudinary configuration here, after dotenv.config()
+// The process.env variables are now available.
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_CLOUD_API,
+    api_secret: process.env.CLOUDINARY_CLOUD_SECRET
+});
 
 const port=process.env.PORT || 5000
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    origin:"http://localhost:5173", credentials:true
+    origin:"http://localhost:5173", credentials:true
 }))
 app.use("/api/auth",authRouter)
 app.use("/api/user",userRouter)
 
 
 app.listen(port,()=>{
-    connectDb();
-    console.log("Server is running at PORT:",port) 
+    connectDb();
+    console.log("Server is running at PORT:",port) 
 })

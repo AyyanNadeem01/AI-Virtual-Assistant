@@ -5,6 +5,7 @@ import SignIn from './pages/SignIn';
 import Home from './pages/Home';
 import Customize from './pages/Customize';
 import { UserDataContext } from './context/userContext';
+import Customize2 from './pages/Customize2';
 
 function App() {
   const { userData, setUserData } = useContext(UserDataContext);
@@ -31,7 +32,13 @@ function App() {
         path="/customize" 
         element={userData ? <Customize /> : <Navigate to="/signin" />} 
       />
-    </Routes>
+    <Route 
+        path="/customize2" 
+        element={userData ? <Customize2 /> : <Navigate to="/signin" />} 
+      />
+    </Routes>      
+   
+
   );
 }
 
