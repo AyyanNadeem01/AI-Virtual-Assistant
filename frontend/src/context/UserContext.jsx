@@ -53,6 +53,17 @@ const UserContext = ({ children }) => {
     handleCurrentUser();
   }, []);
 
+  const getGeminiResponse=async(command)=>{
+      try {
+        const result=await axios.post(`${serverUrl}/api/user/asktoassistant`,
+          {command},{withCredentials:true}
+        )
+        return result.data
+      } catch (error) {
+        console.log(error)
+      }
+  } 
+
   const value = {
     serverUrl,
     userData,
@@ -64,6 +75,7 @@ const UserContext = ({ children }) => {
     selectedImage,
     setSelectedImage,
     isLoading,
+    getGeminiResponse
   };
 
   return (

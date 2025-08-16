@@ -28,14 +28,16 @@ app.use(cors({
 app.use("/api/auth",authRouter)
 app.use("/api/user",userRouter)
 
-app.get("/", async (req, res) => {
-  let prompt = req.query.prompt;
-  if (!prompt) {
-    return res.status(400).json({ error: "Prompt is required" });
-  }
-  let data = await geminiResponse(prompt);
-  res.json(data);
-});
+// app.get("/", async (req, res) => {
+//   let prompt = req.query.prompt;
+//   if (!prompt) {
+//     return res.status(400).json({ error: "Prompt is required" });
+//   }
+//   let data = await geminiResponse(prompt);
+//   res.json(data);
+// });
+
+
 app.listen(port,()=>{
     connectDb();
     console.log("Server is running at PORT:",port) 
