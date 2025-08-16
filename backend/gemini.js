@@ -24,7 +24,7 @@ const geminiResponse = async (command, assistantName,userName) => {
     -"userinput": original sentence the user spoke.
     -"response":A short voice-friendly reply e.g., "Sure,
       It now", "Here's what I found", "Today is Tuesday", etc.
-
+    -if there is some information required or asked, give information in response in simple text in response
 
     Type meaning:
     -"general": If it's a factual or informational question.
