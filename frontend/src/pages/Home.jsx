@@ -3,6 +3,8 @@ import { UserDataContext, frontendImagesMap } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Menu, X } from "lucide-react"; // hamburger & close icons
+import aiGif from "../assets/ai.gif";
+import userGif from "../assets/user.gif";
 
 const Home = () => {
   const { getGeminiResponse, userData, serverUrl, setUserData } =
@@ -269,7 +271,7 @@ const Home = () => {
 
       <div className="w-[200px] h-[200px] mt-4 rounded-2xl overflow-hidden shadow-md">
         <img
-          src={isSpeaking ? "src/assets/ai.gif" : "src/assets/user.gif"}
+          src={isSpeaking ? ai.gif : user.gif}
           alt="speaking-state"
           className="w-full h-full object-cover"
         />
