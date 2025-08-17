@@ -271,7 +271,7 @@ const Home = () => {
 
       <div className="w-[200px] h-[200px] mt-4 rounded-2xl overflow-hidden shadow-md">
         <img
-          src={isSpeaking ? ai.gif : user.gif}
+          src={isSpeaking ? aiGif : userGif}
           alt="speaking-state"
           className="w-full h-full object-cover"
         />
