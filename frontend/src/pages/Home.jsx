@@ -37,28 +37,8 @@ const Home = () => {
     setAiResponse(text);
     const utterance = new SpeechSynthesisUtterance(text);
 
-    // 🛑 Stop listening while speaking (prevents loops on mobile)
-    if (recognitionRef.current) {
-      try {
-        recognitionRef.current.stop();
-      } catch (err) {
-        console.warn("Error stopping recognition:", err);
-      }
-    }
-
     setIsSpeaking(true);
-    utterance.onend = () => {
-      setIsSpeaking(false);
-
-      // ✅ Resume listening after speaking is done
-      if (recognitionRef.current && (alwaysListening || userData?.assistantName)) {
-        try {
-          recognitionRef.current.start();
-        } catch (err) {
-          console.warn("Recognition already running");
-        }
-      }
-    };
+    utterance.onend = () => setIsSpeaking(false);
 
     window.speechSynthesis.speak(utterance);
   };
@@ -128,9 +108,7 @@ const Home = () => {
 
     if (!recognitionRef.current) {
       recognitionRef.current = new SpeechRecognition();
-
-      // ❌ continuous=true causes loops on mobile
-      recognitionRef.current.continuous = false;
+      recognitionRef.current.continuous = true;
       recognitionRef.current.interimResults = true;
       recognitionRef.current.lang = "en-US";
     }
@@ -170,8 +148,7 @@ const Home = () => {
     };
 
     recognition.onend = () => {
-      // ✅ Restart only if not speaking
-      if (!isSpeaking && (alwaysListening || userData?.assistantName)) {
+      if (alwaysListening || userData?.assistantName) {
         console.log("🔄 Recognition ended → restarting…");
         try {
           recognition.start();
@@ -191,11 +168,9 @@ const Home = () => {
       recognition.onresult = null;
       recognition.onerror = null;
       recognition.onend = null;
-      try {
-        recognition.stop();
-      } catch (err) {}
+      recognition.stop();
     };
-  }, [userData, getGeminiResponse, alwaysListening, isSpeaking]);
+  }, [userData, getGeminiResponse, alwaysListening]);
 
   return (
     <div className="flex flex-col justify-center items-center w-full min-h-screen bg-gradient-to-t from-black to-[#02026df4] gap-[15px] relative">
@@ -224,9 +199,7 @@ const Home = () => {
               : "bg-white text-black hover:bg-blue-400 hover:text-white"
           }`}
         >
-          {alwaysListening
-            ? "🟢 Always Listening"
-            : "🎧 Manual Listening without saying wake up (my name)"}
+          {alwaysListening ? "🟢 Always Listening" : "🎧 Manual Listening without saying wake up (my name)"}
         </button>
       </div>
 
@@ -264,9 +237,7 @@ const Home = () => {
                   : "bg-gray-100 hover:bg-blue-400 hover:text-white"
               }`}
             >
-              {alwaysListening
-                ? "🟢 Always Listening"
-                : "🎧 Manual Listening without saying wake up (my name)"}
+              {alwaysListening ? "🟢 Always Listening" : "🎧 Manual Listening without saying wake up (my name)"}
             </button>
           </div>
         )}
