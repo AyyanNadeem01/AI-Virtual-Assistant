@@ -9,7 +9,7 @@ import image7 from "../assets/image7.jpeg"
 import authBg from "../assets/authBg.png"
 import { RiImageAddLine } from "react-icons/ri"
 import { IoArrowBack } from "react-icons/io5"
-import { UserDataContext } from '../context/userContext'
+import { UserDataContext } from '../context/UserContext'
 import {useNavigate} from "react-router-dom"
 const Customize = () => {
   const { serverUrl,userData,setUserData,frontendImage,
