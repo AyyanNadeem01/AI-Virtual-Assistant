@@ -96,6 +96,7 @@ export const askToAssistant=async(req,res)=>{
         case "youtube_search":
         case "youtube_play":
         case "general":
+        case "google_search":
         case "calculator_open":
         case "instagram_open":
         case "facebook_open":

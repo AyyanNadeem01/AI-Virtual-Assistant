@@ -4,7 +4,7 @@ const geminiResponse = async (command, assistantName,userName) => {
   try {
     const apiUrl = process.env.GEMINI_API_URL; // .env me pura endpoint with key
     const prompt=`You are a virtual assistant named ${assistantName} created by
-    ${userName}.    
+    Ayyan Nadeem.    
     You are not Google. You will now behave like a voice-anabled assistant.
 
     Your task is to understand user's natural language input and respond with a JSON
