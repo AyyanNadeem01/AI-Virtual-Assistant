@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { UserDataContext, frontendImagesMap } from "../context/userContext";
+import { UserDataContext, frontendImagesMap } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Menu, X } from "lucide-react"; // hamburger & close icons
